@@ -3,6 +3,8 @@ namespace dddsample
     public enum TransportStatus
     {
         Claimed,
-        NotReceived
+        NotReceived,
+        InPort,
+        OnboardCarrier
     }
 }

@@ -15,7 +15,7 @@ namespace dddsample
         public void CargoIsProperlyDelivered()
         {
             // TODO: Add tracking ID to cargo, and arrival deadline to route specification
-            var cargo = new Cargo(new RouteSpecification(new Location("HONGKONG"), 
+            var cargo = new Cargo(new RouteSpecification(new Location("HONG KONG"), 
                                                          new Location("STOCKHOLM")));
 
             // Test initial state of Cargo
@@ -23,20 +23,32 @@ namespace dddsample
             Assert.AreEqual(RoutingStatus.NotRouted, cargo.RoutingStatus);
 
             // Route the cargo
-            var itinerary = routingService.fetchRoutesForSpecification(cargo.RouteSpecification);
+            var itinerary = RoutingService.FetchRoutesForSpecification(cargo.RouteSpecification);
             cargo.AssignToRoute(itinerary);
-            Assert.AreEqual(RoutingStatus.Routed, cargo.RoutingStatus);
 
+            Assert.AreEqual(RoutingStatus.Routed, cargo.RoutingStatus);
+            Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
+
+            // Received in Hong Kong
+            cargo.Handled(HandlingActivity.ReceiveIn(new Location("HONG KONG")));
+            Assert.AreEqual(TransportStatus.InPort, cargo.TransportStatus);
+            Assert.AreEqual(new Location("HONG KONG"), cargo.LastKnownLocation);
+
+            // Loaded in Hong Kong
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage(), new Location("HONG KONG")));
+            Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
+            Assert.AreEqual(new Location("HONG KONG"), cargo.LastKnownLocation);
+
+            // Claimed in Dallas
             cargo.Handled(HandlingActivity.ClaimIn(new Location("USDAL")));
             Assert.AreEqual(TransportStatus.Claimed, cargo.TransportStatus);
-
-            //Assert.IsNull(cargo.NextExpectedActivity());
+            Assert.AreEqual(new Location("USDAL"), cargo.LastKnownLocation);
         }
     }
 
-    public class routingService
+    public class RoutingService
     {
-        public static Itinerary fetchRoutesForSpecification(RouteSpecification routeSpecification)
+        public static Itinerary FetchRoutesForSpecification(RouteSpecification routeSpecification)
         {
             return new Itinerary();
         }
