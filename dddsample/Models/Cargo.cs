@@ -2,27 +2,26 @@ namespace dddsample
 {
     public class Cargo
     {
-        private TransportStatus _transportStatus = dddsample.TransportStatus.NotReceived;
+        public RoutingStatus RoutingStatus  { get; private set; }
         public RouteSpecification RouteSpecification { get; private set; }
+
+        public TransportStatus TransportStatus { get; set; }
 
         public Cargo(RouteSpecification routeSpecification)
         {
+            TransportStatus = TransportStatus.NotReceived;
+            RoutingStatus = RoutingStatus.NotRouted;
             RouteSpecification = routeSpecification;
-        }
-
-        public TransportStatus TransportStatus()
-        {
-            return _transportStatus;
         }
 
         public void Handled(HandlingActivity handlingActivity)
         {
-            _transportStatus = dddsample.TransportStatus.Claimed;
+            TransportStatus = TransportStatus.Claimed;
         }
 
-        public RoutingStatus RoutingStatus()
+        public void AssignToRoute(Itinerary itinerary)
         {
-            return dddsample.RoutingStatus.NotRouted;
+            RoutingStatus = RoutingStatus.Routed;
         }
     }
 }

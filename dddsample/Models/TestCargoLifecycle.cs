@@ -19,15 +19,16 @@ namespace dddsample
                                                          new Location("STOCKHOLM")));
 
             // Test initial state of Cargo
-            Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus());
-            Assert.AreEqual(RoutingStatus.NotRouted, cargo.RoutingStatus());
+            Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
+            Assert.AreEqual(RoutingStatus.NotRouted, cargo.RoutingStatus);
 
             // Route the cargo
             var itinerary = routingService.fetchRoutesForSpecification(cargo.RouteSpecification);
-            Assert.AreEqual(RoutingStatus.Routed, cargo.RoutingStatus());
+            cargo.AssignToRoute(itinerary);
+            Assert.AreEqual(RoutingStatus.Routed, cargo.RoutingStatus);
 
             cargo.Handled(HandlingActivity.ClaimIn(new Location("USDAL")));
-            Assert.AreEqual(TransportStatus.Claimed, cargo.TransportStatus());
+            Assert.AreEqual(TransportStatus.Claimed, cargo.TransportStatus);
 
             //Assert.IsNull(cargo.NextExpectedActivity());
         }
