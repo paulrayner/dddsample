@@ -2,6 +2,7 @@
 {
     public enum RoutingStatus
     {
-        NotRouted
+        NotRouted,
+        Routed
     }
 }

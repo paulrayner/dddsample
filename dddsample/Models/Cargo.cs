@@ -3,6 +3,12 @@ namespace dddsample
     public class Cargo
     {
         private TransportStatus _transportStatus = dddsample.TransportStatus.NotReceived;
+        public RouteSpecification RouteSpecification { get; private set; }
+
+        public Cargo(RouteSpecification routeSpecification)
+        {
+            RouteSpecification = routeSpecification;
+        }
 
         public TransportStatus TransportStatus()
         {
