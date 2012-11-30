@@ -46,6 +46,10 @@
   <ItemGroup>
     <Compile Include="Models\Cargo.cs" />
     <Compile Include="Models\CargoTests.cs" />
+    <Compile Include="Models\Itinerary.cs" />
+    <Compile Include="Models\Leg.cs" />
+    <Compile Include="Models\RouteSpecification.cs" />
+    <Compile Include="Models\RoutingService.cs" />
     <Compile Include="Models\TrackingIdTests.cs" />
     <Compile Include="Models\HandlingActivityType.cs" />
     <Compile Include="Models\RoutingStatus.cs" />
