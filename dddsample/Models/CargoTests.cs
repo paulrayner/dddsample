@@ -10,16 +10,23 @@ namespace dddsample.Models
         public void CargoIsInitializedCorrectly()
         {
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                   new RouteSpecification(new Location("HONG KONG"),
-                                                          new Location("STOCKHOLM")));
+                                  new RouteSpecification(Location.HongKong, Location.Dallas));
 
-            var expectedRouteSpecification = new RouteSpecification(new Location("HONG KONG"),
-                                                          new Location("STOCKHOLM"));
+            var expectedRouteSpecification = new RouteSpecification(Location.HongKong, Location.Dallas);
+
+            Assert.AreEqual(new TrackingId("XYZ"), cargo.TrackingId);
+            Assert.AreEqual(expectedRouteSpecification, cargo.RouteSpecification);
 
             Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
             Assert.AreEqual(RoutingStatus.NotRouted, cargo.RoutingStatus);
-            Assert.AreEqual(new TrackingId("XYZ"), cargo.TrackingId);
-            Assert.AreEqual(expectedRouteSpecification, cargo.RouteSpecification);
+        }
+
+        [Test]
+        public void CargoCanBeRouted()
+        {
+            var cargo = new Cargo(new TrackingId("XYZ"),
+                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+
         }
     }
 }

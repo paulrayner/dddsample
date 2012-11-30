@@ -8,6 +8,7 @@ namespace dddsample
 
         // Java example requires client of Location having to specify timezone etc - should just
         // be able to pass in the United Nations location locationCode
+        public static Location HongKong = new Location("HONG KONG");
         public static Location Dallas = new Location("USDAL");
 
         public Location(string locationCode)

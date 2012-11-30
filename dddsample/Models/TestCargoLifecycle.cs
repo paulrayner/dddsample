@@ -17,8 +17,7 @@ namespace dddsample
         {
             // TODO: Add arrival deadline to route specification
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                  new RouteSpecification(new Location("HONG KONG"), 
-                                                         new Location("STOCKHOLM")));
+                                  new RouteSpecification(Location.HongKong, Location.Dallas));
 
             // Test initial state of Cargo
             Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
@@ -32,19 +31,19 @@ namespace dddsample
             Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
 
             // Received in Hong Kong
-            cargo.Handled(HandlingActivity.ReceiveIn(new Location("HONG KONG")));
+            cargo.Handled(HandlingActivity.ReceiveIn(Location.HongKong));
             Assert.AreEqual(TransportStatus.InPort, cargo.TransportStatus);
-            Assert.AreEqual(new Location("HONG KONG"), cargo.LastKnownLocation);
+            Assert.AreEqual(Location.HongKong, cargo.LastKnownLocation);
 
             // Loaded in Hong Kong
-            cargo.Handled(HandlingActivity.LoadOnto(new Voyage(), new Location("HONG KONG")));
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage(), Location.HongKong));
             Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
-            Assert.AreEqual(new Location("HONG KONG"), cargo.LastKnownLocation);
+            Assert.AreEqual(Location.HongKong, cargo.LastKnownLocation);
 
             // Claimed in Dallas
-            cargo.Handled(HandlingActivity.ClaimIn(new Location("USDAL")));
+            cargo.Handled(HandlingActivity.ClaimIn(Location.Dallas));
             Assert.AreEqual(TransportStatus.Claimed, cargo.TransportStatus);
-            Assert.AreEqual(new Location("USDAL"), cargo.LastKnownLocation);
+            Assert.AreEqual(Location.Dallas, cargo.LastKnownLocation);
         }
     }
 
