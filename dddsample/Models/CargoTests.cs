@@ -27,6 +27,9 @@ namespace dddsample.Models
             var cargo = new Cargo(new TrackingId("XYZ"),
                                   new RouteSpecification(Location.HongKong, Location.Dallas));
 
+            var itinerary = new Itinerary();
+
+            cargo.AssignToRoute(itinerary);
         }
     }
 }
