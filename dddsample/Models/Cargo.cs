@@ -21,18 +21,7 @@ namespace dddsample
 
         public void Handled(HandlingActivity handlingActivity)
         {
-            if (handlingActivity.Equals(HandlingActivity.ReceiveIn(new Location("HONG KONG"))))
-            {
-                TransportStatus = TransportStatus.InPort;
-            }
-            else if (handlingActivity.Equals(HandlingActivity.ClaimIn(new Location("USDAL"))))
-            {
-                TransportStatus = TransportStatus.Claimed;
-            }
-            else
-            {
-                TransportStatus = TransportStatus.OnboardCarrier;
-            }
+            TransportStatus = TransportStatus.DeriveTransportStatus(handlingActivity);
             LastKnownLocation = handlingActivity.Location;
         }
 

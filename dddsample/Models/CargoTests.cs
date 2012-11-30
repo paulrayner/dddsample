@@ -27,15 +27,53 @@ namespace dddsample.Models
         {
             var cargo = new Cargo(new TrackingId("XYZ"),
                                   new RouteSpecification(Location.HongKong, Location.Dallas));
-            var leg = new Leg(Location.HongKong, Location.Dallas, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
-            var legs = new List<Leg>(leg, leg);
-            var expectedItinerary = new Itinerary(legs);
 
-            var itinerary = new Itinerary();
+            var itinerary = StubItinerary();
             cargo.AssignToRoute(itinerary);
 
             Assert.AreEqual(RoutingStatus.Routed, cargo.RoutingStatus);
+            var expectedItinerary = StubItinerary();
             Assert.AreEqual(expectedItinerary, cargo.Itinerary);
         }
+
+        [Test]
+        public void RoutedCargoCanBeReceivedInPort()
+        {
+            var cargo = new Cargo(new TrackingId("XYZ"),
+                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+            cargo.AssignToRoute(StubItinerary());
+
+            cargo.Handled(HandlingActivity.ReceiveIn(Location.HongKong));
+
+            Assert.AreEqual(TransportStatus.InPort, cargo.TransportStatus);
+            Assert.AreEqual(Location.HongKong, cargo.LastKnownLocation);
+        }
+
+        [Test]
+        public void RoutedCargoCanBeLoaded()
+        {
+            var cargo = new Cargo(new TrackingId("XYZ"),
+                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+            cargo.AssignToRoute(StubItinerary());
+
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage(), Location.HongKong));
+
+            Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
+        }
+
+
+
+        private static Itinerary StubItinerary()
+        {
+            return new Itinerary(GetStubLegs());
+        }
+
+        private static List<Leg> GetStubLegs()
+        {
+            var leg = new Leg(Location.HongKong, Location.Dallas, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
+            var legs = new List<Leg> {leg};
+            return legs;
+        }
+
     }
 }

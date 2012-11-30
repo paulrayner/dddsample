@@ -61,5 +61,10 @@ namespace dddsample
         {
             return !Equals(left, right);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Type: {0}, Location: {1}", Type, Location);
+        }
     }
 }
