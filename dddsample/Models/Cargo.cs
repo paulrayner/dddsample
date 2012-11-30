@@ -1,3 +1,5 @@
+using dddsample.Models;
+
 namespace dddsample
 {
     public class Cargo
@@ -7,12 +9,14 @@ namespace dddsample
         public TransportStatus TransportStatus { get; private set; }
         public Location LastKnownLocation { get; private set; }
         public Itinerary Itinerary { get; private set; }
+        public TrackingId TrackingId { get; private set; }
 
-        public Cargo(RouteSpecification routeSpecification)
+        public Cargo(TrackingId trackingId, RouteSpecification routeSpecification)
         {
+            TrackingId = trackingId;
+            RouteSpecification = routeSpecification;
             TransportStatus = TransportStatus.NotReceived;
             RoutingStatus = RoutingStatus.NotRouted;
-            RouteSpecification = routeSpecification;
         }
 
         public void Handled(HandlingActivity handlingActivity)

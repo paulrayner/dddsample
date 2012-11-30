@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using dddsample.Models;
 
 namespace dddsample
 {
@@ -13,8 +15,9 @@ namespace dddsample
         [Test]
         public void CargoIsProperlyDelivered()
         {
-            // TODO: Add tracking ID to cargo, and arrival deadline to route specification
-            var cargo = new Cargo(new RouteSpecification(new Location("HONG KONG"), 
+            // TODO: Add arrival deadline to route specification
+            var cargo = new Cargo(new TrackingId("XYZ"),
+                                  new RouteSpecification(new Location("HONG KONG"), 
                                                          new Location("STOCKHOLM")));
 
             // Test initial state of Cargo
@@ -57,7 +60,7 @@ namespace dddsample
     {
     }
 
-    public class RouteSpecification
+    public class RouteSpecification : IEquatable<RouteSpecification>
     {
         public Location Origin { get; private set; }
         public Location Destination { get; private set; }
@@ -66,6 +69,44 @@ namespace dddsample
         {
             Origin = origin;
             Destination = destination;
+        }
+
+        public bool Equals(RouteSpecification other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.Origin, Origin) && Equals(other.Destination, Destination);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (RouteSpecification)) return false;
+            return Equals((RouteSpecification) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Origin.GetHashCode()*397) ^ Destination.GetHashCode();
+            }
+        }
+
+        public static bool operator ==(RouteSpecification left, RouteSpecification right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(RouteSpecification left, RouteSpecification right)
+        {
+            return !Equals(left, right);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Origin: {0}, Destination: {1}", Origin, Destination);
         }
     }
 }

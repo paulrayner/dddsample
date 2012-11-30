@@ -45,12 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Cargo.cs" />
+    <Compile Include="Models\CargoTests.cs" />
+    <Compile Include="Models\TrackingIdTests.cs" />
     <Compile Include="Models\HandlingActivityType.cs" />
     <Compile Include="Models\RoutingStatus.cs" />
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\HandlingActivity.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\TestCargoLifecycle.cs" />
+    <Compile Include="Models\TrackingId.cs" />
     <Compile Include="Models\TransportStatus.cs" />
     <Compile Include="Models\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
