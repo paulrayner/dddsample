@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using dddsample.Model.Shared;
+using dddsample.Model.Voyage;
 
 namespace dddsample.Model.Cargo
 {
@@ -35,7 +36,7 @@ namespace dddsample.Model.Cargo
             Assert.AreEqual(Location.Location.HongKong, cargo.LastKnownLocation);
 
             // Loaded in Hong Kong
-            cargo.Handled(HandlingActivity.LoadOnto(new Voyage.Voyage(), Location.Location.HongKong));
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage.Voyage(new VoyageNumber("ABC")), Location.Location.HongKong));
             Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
             Assert.AreEqual(Location.Location.HongKong, cargo.LastKnownLocation);
 

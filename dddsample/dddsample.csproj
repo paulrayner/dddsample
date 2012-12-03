@@ -51,6 +51,9 @@
     <Compile Include="Model\Cargo\Itinerary.cs" />
     <Compile Include="Model\Cargo\Leg.cs" />
     <Compile Include="Model\Cargo\RouteSpecification.cs" />
+    <Compile Include="Model\Handling\HandlingEvent.cs" />
+    <Compile Include="Model\Handling\HandlingEventTests.cs" />
+    <Compile Include="Model\Handling\HandlingHistory.cs" />
     <Compile Include="Model\RoutingService.cs" />
     <Compile Include="Model\Cargo\TrackingIdTests.cs" />
     <Compile Include="Model\Shared\HandlingActivityType.cs" />
@@ -64,9 +67,7 @@
     <Compile Include="Model\Voyage\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Handling\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

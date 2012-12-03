@@ -5,6 +5,7 @@ namespace dddsample.Model.Cargo
     [TestFixture]
     public class TrackingIdTests
     {
+        // TODO Finish testing for immutability like I did for Leg
         [Test]
         public void TrackingIdShouldBeValueObject()
         {

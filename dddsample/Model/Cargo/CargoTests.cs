@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using dddsample.Model.Shared;
+using dddsample.Model.Voyage;
 
 namespace dddsample.Model.Cargo
 {
@@ -57,7 +58,7 @@ namespace dddsample.Model.Cargo
                                   new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas));
             cargo.AssignToRoute(StubItinerary());
 
-            cargo.Handled(HandlingActivity.LoadOnto(new Voyage.Voyage(), Location.Location.HongKong));
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage.Voyage(new VoyageNumber("ABC")), Location.Location.HongKong));
 
             Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
         }
