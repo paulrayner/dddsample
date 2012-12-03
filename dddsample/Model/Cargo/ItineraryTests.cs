@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using dddsample.Model.Shared;
+using dddsample.Model.Location;
 
 namespace dddsample.Model.Cargo
 {
@@ -17,6 +17,18 @@ namespace dddsample.Model.Cargo
             Assert.AreEqual(expectedItinerary, itinerary);
         }
 
+
+        [Test]
+        public void ItineraryEqualitySequenceOfLegsMatters()
+        {
+            var leg1 = new Leg(Location.Location.HongKong, Location.Location.LongBeach, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
+            var leg2 = new Leg(Location.Location.LongBeach, Location.Location.Dallas, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
+            var legs1 = new List<Leg> { leg1, leg2 };
+            var legs2 = new List<Leg> { leg2, leg1 };
+
+            Assert.AreNotEqual(new Itinerary(legs1), new Itinerary(legs2));
+
+        }
 
         private static Itinerary StubItinerary()
         {
