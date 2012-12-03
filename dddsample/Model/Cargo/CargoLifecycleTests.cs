@@ -5,7 +5,7 @@ using dddsample.Model.Voyage;
 namespace dddsample.Model.Cargo
 {
     [TestFixture]
-    public class CargoLifecycle
+    public class CargoLifecycleTests
     {
         // TODO: Implement cargo.IsReadyToClaim()  <--- based on customs clearance point == destination
         // TODO: Implement cargo.IsMisdirected()
