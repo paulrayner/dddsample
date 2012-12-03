@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace dddsample.Model.Cargo
 {
     public class Itinerary : IEquatable<Itinerary>
     {
-        public List<Leg> Legs { get; private set; }
+        public ReadOnlyCollection<Leg> Legs { get; private set; }
 
-        public Itinerary(List<Leg> legs)
+        public Itinerary(IEnumerable<Leg> legs)
         {
-            Legs = legs;
+            Legs = new ReadOnlyCollection<Leg>(new List<Leg>(legs)); // Defensively copy collection
         }
 
         public bool Equals(Itinerary other)
