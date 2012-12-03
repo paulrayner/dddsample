@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace dddsample
+namespace dddsample.Model.Cargo
 {
     public class Itinerary : IEquatable<Itinerary>
     {
@@ -16,7 +17,7 @@ namespace dddsample
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.Legs, Legs);
+            return  other.Legs.SequenceEqual(Legs);
         }
 
         public override bool Equals(object obj)

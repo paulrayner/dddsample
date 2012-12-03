@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace dddsample.Models
+namespace dddsample.Model.Cargo
 {
     [TestFixture]
     public class TrackingIdTests

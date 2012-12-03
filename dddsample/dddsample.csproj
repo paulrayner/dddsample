@@ -44,23 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Cargo.cs" />
-    <Compile Include="Models\CargoTests.cs" />
-    <Compile Include="Models\Itinerary.cs" />
-    <Compile Include="Models\Leg.cs" />
-    <Compile Include="Models\RouteSpecification.cs" />
-    <Compile Include="Models\RoutingService.cs" />
-    <Compile Include="Models\TrackingIdTests.cs" />
-    <Compile Include="Models\HandlingActivityType.cs" />
-    <Compile Include="Models\RoutingStatus.cs" />
-    <Compile Include="Models\Delivery.cs" />
-    <Compile Include="Models\HandlingActivity.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\TestCargoLifecycle.cs" />
-    <Compile Include="Models\TrackingId.cs" />
-    <Compile Include="Models\TransportStatus.cs" />
-    <Compile Include="Models\Voyage.cs" />
+    <Compile Include="Model\Cargo\Cargo.cs" />
+    <Compile Include="Model\Cargo\CargoTests.cs" />
+    <Compile Include="Model\Cargo\LegTests.cs" />
+    <Compile Include="Model\Cargo\ItineraryTests.cs" />
+    <Compile Include="Model\Cargo\Itinerary.cs" />
+    <Compile Include="Model\Cargo\Leg.cs" />
+    <Compile Include="Model\Cargo\RouteSpecification.cs" />
+    <Compile Include="Model\RoutingService.cs" />
+    <Compile Include="Model\Cargo\TrackingIdTests.cs" />
+    <Compile Include="Model\Shared\HandlingActivityType.cs" />
+    <Compile Include="Model\Cargo\RoutingStatus.cs" />
+    <Compile Include="Model\Cargo\Delivery.cs" />
+    <Compile Include="Model\Shared\HandlingActivity.cs" />
+    <Compile Include="Model\Location\Location.cs" />
+    <Compile Include="Model\Cargo\TestCargoLifecycle.cs" />
+    <Compile Include="Model\Cargo\TrackingId.cs" />
+    <Compile Include="Model\Cargo\TransportStatus.cs" />
+    <Compile Include="Model\Voyage\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Handling\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

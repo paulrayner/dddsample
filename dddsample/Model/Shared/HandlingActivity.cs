@@ -1,29 +1,29 @@
 using System;
 
-namespace dddsample
+namespace dddsample.Model.Shared
 {
     public class HandlingActivity : IEquatable<HandlingActivity>
     {
         public HandlingActivityType Type { get; private set; }
-        public Location Location { get; private set; }
+        public Location.Location Location { get; private set; }
 
-        private HandlingActivity(HandlingActivityType type, Location location)
+        private HandlingActivity(HandlingActivityType type, Location.Location location)
         {
             Type = type;
             Location = location;
         }
 
-        public static HandlingActivity ClaimIn(Location location)
+        public static HandlingActivity ClaimIn(Location.Location location)
         {
             return new HandlingActivity(HandlingActivityType.Claim, location);
         }
 
-        public static HandlingActivity ReceiveIn(Location location)
+        public static HandlingActivity ReceiveIn(Location.Location location)
         {
             return new HandlingActivity(HandlingActivityType.Receive, location);
         }
 
-        public static HandlingActivity LoadOnto(Voyage voyage, Location location)
+        public static HandlingActivity LoadOnto(Voyage.Voyage voyage, Location.Location location)
         {
             return new HandlingActivity(HandlingActivityType.Load, location);
         }

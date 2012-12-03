@@ -1,13 +1,13 @@
 using System;
 
-namespace dddsample
+namespace dddsample.Model.Cargo
 {
     public class RouteSpecification : IEquatable<RouteSpecification>
     {
-        public Location Origin { get; private set; }
-        public Location Destination { get; private set; }
+        public Location.Location Origin { get; private set; }
+        public Location.Location Destination { get; private set; }
 
-        public RouteSpecification(Location origin, Location destination)
+        public RouteSpecification(Location.Location origin, Location.Location destination)
         {
             Origin = origin;
             Destination = destination;

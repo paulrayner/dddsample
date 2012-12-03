@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace dddsample.Models
+namespace dddsample.Model.Cargo
 {
     public class TrackingId : IEquatable<TrackingId>
     {

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using dddsample.Models;
+using dddsample.Model.Shared;
 
-namespace dddsample
+namespace dddsample.Model.Cargo
 {
     [TestFixture]
     public class CargoLifecycle
@@ -16,7 +16,7 @@ namespace dddsample
         {
             // TODO: Add arrival deadline to route specification
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+                                  new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas));
 
             // Test initial state of Cargo
             Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
@@ -30,19 +30,19 @@ namespace dddsample
             Assert.AreEqual(TransportStatus.NotReceived, cargo.TransportStatus);
 
             // Received in Hong Kong
-            cargo.Handled(HandlingActivity.ReceiveIn(Location.HongKong));
+            cargo.Handled(HandlingActivity.ReceiveIn(Location.Location.HongKong));
             Assert.AreEqual(TransportStatus.InPort, cargo.TransportStatus);
-            Assert.AreEqual(Location.HongKong, cargo.LastKnownLocation);
+            Assert.AreEqual(Location.Location.HongKong, cargo.LastKnownLocation);
 
             // Loaded in Hong Kong
-            cargo.Handled(HandlingActivity.LoadOnto(new Voyage(), Location.HongKong));
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage.Voyage(), Location.Location.HongKong));
             Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
-            Assert.AreEqual(Location.HongKong, cargo.LastKnownLocation);
+            Assert.AreEqual(Location.Location.HongKong, cargo.LastKnownLocation);
 
             // Claimed in Dallas
-            cargo.Handled(HandlingActivity.ClaimIn(Location.Dallas));
+            cargo.Handled(HandlingActivity.ClaimIn(Location.Location.Dallas));
             Assert.AreEqual(TransportStatus.Claimed, cargo.TransportStatus);
-            Assert.AreEqual(Location.Dallas, cargo.LastKnownLocation);
+            Assert.AreEqual(Location.Location.Dallas, cargo.LastKnownLocation);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace dddsample
+namespace dddsample.Model.Location
 {
     public class Location : IEquatable<Location>
     {
@@ -9,6 +9,7 @@ namespace dddsample
         // Java example requires client of Location having to specify timezone etc - should just
         // be able to pass in the United Nations location locationCode
         public static Location HongKong = new Location("HONG KONG");
+        public static Location LongBeach = new Location("USLGB");
         public static Location Dallas = new Location("USDAL");
 
         public Location(string locationCode)

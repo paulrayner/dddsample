@@ -1,4 +1,6 @@
-namespace dddsample
+using dddsample.Model.Shared;
+
+namespace dddsample.Model.Cargo
 {
     public enum TransportStatus
     {

@@ -1,15 +1,15 @@
 using System;
 
-namespace dddsample
+namespace dddsample.Model.Cargo
 {
     public class Leg : IEquatable<Leg>
     {
-        public Location LoadLocation { get; private set; }
-        public Location UnLoadLocation { get; private set; }
+        public Location.Location LoadLocation { get; private set; }
+        public Location.Location UnLoadLocation { get; private set; }
         public DateTime LoadTime { get; private set; }
         public DateTime UnLoadTime { get; private set; }
 
-        public Leg(Location loadLocation, Location unLoadLocation, DateTime loadTime, DateTime unLoadTime)
+        public Leg(Location.Location loadLocation, Location.Location unLoadLocation, DateTime loadTime, DateTime unLoadTime)
         {
             LoadLocation = loadLocation;
             UnLoadLocation = unLoadLocation;

@@ -1,13 +1,13 @@
-using dddsample.Models;
+using dddsample.Model.Shared;
 
-namespace dddsample
+namespace dddsample.Model.Cargo
 {
     public class Cargo
     {
         public RoutingStatus RoutingStatus  { get; private set; }
         public RouteSpecification RouteSpecification { get; private set; }
         public TransportStatus TransportStatus { get; private set; }
-        public Location LastKnownLocation { get; private set; }
+        public Location.Location LastKnownLocation { get; private set; }
         public Itinerary Itinerary { get; private set; }
         public TrackingId TrackingId { get; private set; }
 

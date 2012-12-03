@@ -1,4 +1,4 @@
-namespace dddsample
+namespace dddsample.Model.Shared
 {
     public enum HandlingActivityType
     {

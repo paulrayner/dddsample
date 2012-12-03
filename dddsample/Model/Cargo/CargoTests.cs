@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using dddsample.Model.Shared;
 
-namespace dddsample.Models
+namespace dddsample.Model.Cargo
 {
     [TestFixture]
     public class CargoTests
@@ -11,9 +12,9 @@ namespace dddsample.Models
         public void CargoIsInitializedCorrectly()
         {
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+                                  new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas));
 
-            var expectedRouteSpecification = new RouteSpecification(Location.HongKong, Location.Dallas);
+            var expectedRouteSpecification = new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas);
 
             Assert.AreEqual(new TrackingId("XYZ"), cargo.TrackingId);
             Assert.AreEqual(expectedRouteSpecification, cargo.RouteSpecification);
@@ -26,7 +27,7 @@ namespace dddsample.Models
         public void CargoCanBeRouted()
         {
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+                                  new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas));
 
             var itinerary = StubItinerary();
             cargo.AssignToRoute(itinerary);
@@ -40,23 +41,23 @@ namespace dddsample.Models
         public void RoutedCargoCanBeReceivedInPort()
         {
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+                                  new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas));
             cargo.AssignToRoute(StubItinerary());
 
-            cargo.Handled(HandlingActivity.ReceiveIn(Location.HongKong));
+            cargo.Handled(HandlingActivity.ReceiveIn(Location.Location.HongKong));
 
             Assert.AreEqual(TransportStatus.InPort, cargo.TransportStatus);
-            Assert.AreEqual(Location.HongKong, cargo.LastKnownLocation);
+            Assert.AreEqual(Location.Location.HongKong, cargo.LastKnownLocation);
         }
 
         [Test]
         public void RoutedCargoCanBeLoaded()
         {
             var cargo = new Cargo(new TrackingId("XYZ"),
-                                  new RouteSpecification(Location.HongKong, Location.Dallas));
+                                  new RouteSpecification(Location.Location.HongKong, Location.Location.Dallas));
             cargo.AssignToRoute(StubItinerary());
 
-            cargo.Handled(HandlingActivity.LoadOnto(new Voyage(), Location.HongKong));
+            cargo.Handled(HandlingActivity.LoadOnto(new Voyage.Voyage(), Location.Location.HongKong));
 
             Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
         }
@@ -70,7 +71,7 @@ namespace dddsample.Models
 
         private static List<Leg> GetStubLegs()
         {
-            var leg = new Leg(Location.HongKong, Location.Dallas, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
+            var leg = new Leg(Location.Location.HongKong, Location.Location.Dallas, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
             var legs = new List<Leg> {leg};
             return legs;
         }
