@@ -51,6 +51,7 @@
     <Compile Include="Model\Cargo\Itinerary.cs" />
     <Compile Include="Model\Cargo\Leg.cs" />
     <Compile Include="Model\Cargo\RouteSpecification.cs" />
+    <Compile Include="Model\Handling\HandlingHistoryTests.cs" />
     <Compile Include="Model\Handling\HandlingEvent.cs" />
     <Compile Include="Model\Handling\HandlingEventTests.cs" />
     <Compile Include="Model\Handling\HandlingHistory.cs" />

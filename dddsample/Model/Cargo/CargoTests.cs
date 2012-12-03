@@ -62,15 +62,13 @@ namespace dddsample.Model.Cargo
 
             Assert.AreEqual(TransportStatus.OnboardCarrier, cargo.TransportStatus);
         }
-
-
-
+        
         private static Itinerary StubItinerary()
         {
             return new Itinerary(GetStubLegs());
         }
 
-        private static List<Leg> GetStubLegs()
+        private static IEnumerable<Leg> GetStubLegs()
         {
             var leg = new Leg(Location.Location.HongKong, Location.Location.Dallas, new DateTime(2012, 11, 9), new DateTime(2012, 11, 12));
             var legs = new List<Leg> {leg};
