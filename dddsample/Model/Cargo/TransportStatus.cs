@@ -22,6 +22,7 @@ namespace dddsample.Model.Cargo
                 case HandlingActivityType.Load:
                     return TransportStatus.OnboardCarrier;
                 case HandlingActivityType.Receive:
+                case HandlingActivityType.Unload:
                     return TransportStatus.InPort;
                 case HandlingActivityType.Claim:
                     return TransportStatus.Claimed;

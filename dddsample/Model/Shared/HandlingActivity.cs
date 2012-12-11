@@ -32,6 +32,12 @@ namespace dddsample.Model.Shared
             return new HandlingActivity(HandlingActivityType.Load, location, voyage);
         }
 
+
+        public static HandlingActivity UnloadOff(Voyage.Voyage voyage, Location.Location location)
+        {
+            return new HandlingActivity(HandlingActivityType.Unload, location, voyage);
+        }
+
         public bool Equals(HandlingActivity other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -72,5 +78,6 @@ namespace dddsample.Model.Shared
         {
             return string.Format("Type: {0}, Location: {1}, Voyage: {2}", Type, Location, Voyage);
         }
+
     }
 }

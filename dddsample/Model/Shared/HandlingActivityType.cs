@@ -4,6 +4,7 @@ namespace dddsample.Model.Shared
     {
         Claim,
         Receive,
-        Load
+        Load,
+        Unload
     }
 }
