@@ -41,7 +41,6 @@ namespace dddsample.Model.Cargo
             Assert.AreEqual(Location.Location.HongKong, delivery.LastKnownLocation);
         }
 
-
         [Test]
         public void UpdateDeliveryUponUnloadInPort()
         {
@@ -54,6 +53,21 @@ namespace dddsample.Model.Cargo
             Assert.AreEqual(Voyage.Voyage.None, delivery.CurrentVoyage);
             Assert.AreEqual(TransportStatus.InPort, delivery.TransportStatus);
             Assert.AreEqual(unloadInLongBeach, delivery.MostRecentHandlingActivity);
+            Assert.AreEqual(Location.Location.LongBeach, delivery.LastKnownLocation);
+        }
+
+
+        [Test]
+        public void UpdateDeliveryUponClaimInPort()
+        {
+            var delivery = Delivery.BeforeHandling();
+
+            var claimInLongBeach = HandlingActivity.ClaimIn(Location.Location.LongBeach);
+            delivery = delivery.OnHandling(claimInLongBeach);
+
+            Assert.AreEqual(Voyage.Voyage.None, delivery.CurrentVoyage);
+            Assert.AreEqual(TransportStatus.Claimed, delivery.TransportStatus);
+            Assert.AreEqual(claimInLongBeach, delivery.MostRecentHandlingActivity);
             Assert.AreEqual(Location.Location.LongBeach, delivery.LastKnownLocation);
         }
     }
