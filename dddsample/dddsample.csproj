@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Model\Cargo\Cargo.cs" />
     <Compile Include="Model\Cargo\CargoTests.cs" />
+    <Compile Include="Model\Cargo\SystemTime.cs" />
     <Compile Include="Model\Cargo\DeliveryTests.cs" />
     <Compile Include="Model\Cargo\LegTests.cs" />
     <Compile Include="Model\Cargo\ItineraryTests.cs" />
