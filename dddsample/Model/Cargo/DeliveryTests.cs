@@ -33,8 +33,23 @@ namespace dddsample.Model.Cargo
             var receiveInHongKong = HandlingActivity.ReceiveIn(Location.Location.HongKong);
             delivery = delivery.OnHandling(receiveInHongKong);
 
-            //Assert.AreEqual(Voyage.Voyage.NONE, delivery.CurrentVoyage);
+            Assert.AreEqual(Voyage.Voyage.None, delivery.CurrentVoyage);
             Assert.AreEqual(receiveInHongKong, delivery.MostRecentHandlingActivity);
+            Assert.AreEqual(Location.Location.HongKong, delivery.LastKnownLocation);
+        }
+
+
+        [Test]
+        public void UpdateDeliveryUponUnloadInPort()
+        {
+            var delivery = Delivery.BeforeHandling();
+
+            var voyage = new Voyage.Voyage(new VoyageNumber("abc"));
+            var loadInHongKong = HandlingActivity.LoadOnto(voyage, Location.Location.HongKong);
+            delivery = delivery.OnHandling(loadInHongKong);
+
+            Assert.AreEqual(voyage, delivery.CurrentVoyage);
+            Assert.AreEqual(loadInHongKong, delivery.MostRecentHandlingActivity);
             Assert.AreEqual(Location.Location.HongKong, delivery.LastKnownLocation);
         }
     }

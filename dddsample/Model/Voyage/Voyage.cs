@@ -11,6 +11,8 @@ namespace dddsample.Model.Voyage
             VoyageNumber = voyageNumber;
         }
 
+        public static Voyage None = new Voyage(new VoyageNumber(""));   // NULL object pattern
+
         public bool Equals(Voyage other)
         {
             if (ReferenceEquals(null, other)) return false;

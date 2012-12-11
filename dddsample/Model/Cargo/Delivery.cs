@@ -29,7 +29,21 @@ namespace dddsample.Model.Cargo
 
         public Voyage.Voyage CurrentVoyage
         {
-            get { return MostRecentHandlingActivity.Voyage; }
+            get {
+                return HasBeenHandled() && TransportStatus == TransportStatus.OnboardCarrier
+                           ? MostRecentHandlingActivity.Voyage
+                           : Voyage.Voyage.None;
+            }
+        }
+
+        private bool HasBeenHandled()
+        {
+            return (MostRecentHandlingActivity != null);
+        }
+
+        public TransportStatus TransportStatus
+        {
+            get { return TransportStatus.OnboardCarrier.DeriveTransportStatus(MostRecentHandlingActivity); } // TODO Fix syntax for extension method - this is weird!
         }
     }
 }
