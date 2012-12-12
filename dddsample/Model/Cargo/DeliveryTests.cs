@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using NUnit.Framework;
 using dddsample.Model.Shared;
@@ -11,6 +10,17 @@ namespace dddsample.Model.Cargo
     public class DeliveryTests
     {
         // TODO Put in value object tests
+        // TODO Derive from RouteSpecification and Itinerary
+        // TODO Logic for RoutingStatus on Delivery based on routeSpecification being satisfied by Itinerary
+        private DateTime now;
+
+        [SetUp]
+        public void Init()
+        {
+            // Override System time to verify that LastUpdatedOn works correctly
+            now = DateTime.Now;
+            SystemTime.Now = () => now;
+        }
 
         [Test]
         public void UpdateDeliveryUponLoad()
@@ -20,12 +30,11 @@ namespace dddsample.Model.Cargo
             var loadInHongKong = HandlingActivity.LoadOnto(voyage, Location.Location.HongKong);
             delivery = delivery.OnHandling(loadInHongKong);
 
-            SystemTime.Now = () => DateTime.Now.AddSeconds(1);
+            Assert.AreEqual(now, delivery.LastUpdatedOn);
             Assert.AreEqual(voyage, delivery.CurrentVoyage);
             Assert.AreEqual(TransportStatus.OnboardCarrier, delivery.TransportStatus);
             Assert.AreEqual(loadInHongKong, delivery.MostRecentHandlingActivity);
             Assert.AreEqual(Location.Location.HongKong, delivery.LastKnownLocation);
-            Assert.Less(delivery.LastUpdatedOn, SystemTime.Now());
         }
 
         [Test]
@@ -35,12 +44,11 @@ namespace dddsample.Model.Cargo
             var receiveInHongKong = HandlingActivity.ReceiveIn(Location.Location.HongKong);
             delivery = delivery.OnHandling(receiveInHongKong);
 
-            SystemTime.Now = () => DateTime.Now.AddSeconds(1);
+            Assert.AreEqual(now, delivery.LastUpdatedOn);
             Assert.AreEqual(Voyage.Voyage.None, delivery.CurrentVoyage);
             Assert.AreEqual(TransportStatus.InPort, delivery.TransportStatus);
             Assert.AreEqual(receiveInHongKong, delivery.MostRecentHandlingActivity);
             Assert.AreEqual(Location.Location.HongKong, delivery.LastKnownLocation);
-            Assert.Less(delivery.LastUpdatedOn, SystemTime.Now());
         }
 
         [Test]
@@ -51,12 +59,11 @@ namespace dddsample.Model.Cargo
             var unloadInLongBeach = HandlingActivity.UnloadOff(voyage, Location.Location.LongBeach);
             delivery = delivery.OnHandling(unloadInLongBeach);
 
-            SystemTime.Now = () => DateTime.Now.AddSeconds(1);
+            Assert.AreEqual(now, delivery.LastUpdatedOn);
             Assert.AreEqual(Voyage.Voyage.None, delivery.CurrentVoyage);
             Assert.AreEqual(TransportStatus.InPort, delivery.TransportStatus);
             Assert.AreEqual(unloadInLongBeach, delivery.MostRecentHandlingActivity);
             Assert.AreEqual(Location.Location.LongBeach, delivery.LastKnownLocation);
-            Assert.Less(delivery.LastUpdatedOn, SystemTime.Now());
         }
 
         [Test]
@@ -66,15 +73,11 @@ namespace dddsample.Model.Cargo
             var claimInLongBeach = HandlingActivity.ClaimIn(Location.Location.LongBeach);
             delivery = delivery.OnHandling(claimInLongBeach);
 
-            SystemTime.Now = () => DateTime.Now.AddSeconds(1);
+            Assert.AreEqual(now, delivery.LastUpdatedOn);
             Assert.AreEqual(Voyage.Voyage.None, delivery.CurrentVoyage);
             Assert.AreEqual(TransportStatus.Claimed, delivery.TransportStatus);
             Assert.AreEqual(claimInLongBeach, delivery.MostRecentHandlingActivity);
             Assert.AreEqual(Location.Location.LongBeach, delivery.LastKnownLocation);
-            Assert.Less(delivery.LastUpdatedOn, SystemTime.Now());
         }
-
-        // TODO Derive from RouteSpecification and Itinerary
-        // TODO Logic for RoutingStatus on Delivery based on routeSpecification being satisfied by Itinerary
     }
 }
